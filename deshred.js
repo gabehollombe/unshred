@@ -117,16 +117,13 @@
       return distances;
     },
     deshred: function(args) {
-      var best_index, best_new_img, best_position, best_score, best_shred, canvas_image, finished_image, height, image_data, index, score, shred, shred_width, shreds, strip_data, unmatched_shreds, width, x, _len, _ref;
+      var best_index, best_new_img, best_position, best_score, best_shred, canvas_image, finished_image, index, score, shred, shred_width, shreds, strip_data, unmatched_shreds, x, _len, _ref;
       shreds = args.shreds;
       shred_width = args.width / args.shreds;
-      width = args.width;
-      height = args.height;
-      image_data = args.image_data;
       unmatched_shreds = [];
       shred_width = args.width / args.shreds;
       for (x = 0, _ref = args.width; 0 <= _ref ? x < _ref : x > _ref; x += shred_width) {
-        strip_data = window.scrambled_img.getImageData(x, 0, shred_width, height);
+        strip_data = args.shredded_img.getImageData(x, 0, shred_width, args.height);
         canvas_image = new CanvasImage(shred_width, args.height);
         canvas_image.putImageData(strip_data, 0, 0);
         unmatched_shreds.push(canvas_image);
@@ -163,14 +160,13 @@
     }
   };
   $(window).load(function() {
-    var img;
-    img = document.getElementById('shredded');
-    window.scrambled_img = new CanvasImage().drawImage(img);
+    var shredded_img;
+    shredded_img = new CanvasImage().drawImage($('#shredded')[0]);
     return Deshredder.deshred({
       shreds: 20,
       width: 640,
       height: 359,
-      image_data: scrambled_img.getImageData()
+      shredded_img: shredded_img
     });
   });
 }).call(this);

@@ -82,15 +82,12 @@ Deshredder =
   deshred: (args) ->
     shreds = args.shreds
     shred_width = args.width / args.shreds
-    width = args.width
-    height = args.height
-    image_data = args.image_data
 
     # 1. slice up original image into one image per shred
     unmatched_shreds = []
     shred_width = args.width / args.shreds
     for x in [0...args.width] by shred_width
-      strip_data = window.scrambled_img.getImageData(x, 0, shred_width, height)
+      strip_data = args.shredded_img.getImageData(x, 0, shred_width, args.height)
       canvas_image = new CanvasImage(shred_width, args.height)
       canvas_image.putImageData(strip_data, 0, 0)
       unmatched_shreds.push canvas_image
@@ -133,6 +130,5 @@ Deshredder =
 
 
 $(window).load ->
-  img = document.getElementById('shredded')
-  window.scrambled_img = new CanvasImage().drawImage(img)
-  Deshredder.deshred(shreds: 20, width: 640, height: 359, image_data: scrambled_img.getImageData()) #TODO: put args here
+  shredded_img = new CanvasImage().drawImage($('#shredded')[0])
+  Deshredder.deshred(shreds: 20, width: 640, height: 359, shredded_img: shredded_img)
