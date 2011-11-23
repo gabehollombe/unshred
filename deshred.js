@@ -163,14 +163,14 @@
     }
   };
   $(window).load(function() {
-    var img;
+    var img, scrambled_img_data;
     img = document.getElementById('shredded');
-    window.scrambled_img = new CanvasImage().drawImage(img);
+    scrambled_img_data = new CanvasImage().drawImage(img).getImageData();
     return Deshredder.deshred({
       shreds: 20,
       width: 640,
       height: 359,
-      image_data: scrambled_img.getImageData()
+      image_data: scrambled_img_data
     });
   });
 }).call(this);
