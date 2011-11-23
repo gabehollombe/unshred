@@ -134,5 +134,5 @@ Deshredder =
 
 $(window).load ->
   img = document.getElementById('shredded')
-  scrambled_img_data = new CanvasImage().drawImage(img).getImageData()
-  Deshredder.deshred(shreds: 20, width: 640, height: 359, image_data: scrambled_img_data)
+  window.scrambled_img = new CanvasImage().drawImage(img)
+  Deshredder.deshred(shreds: 20, width: 640, height: 359, image_data: scrambled_img.getImageData()) #TODO: put args here
